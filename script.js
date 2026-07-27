@@ -212,4 +212,7 @@ function decodeBinary() {
   
   var decodedOutput = document.querySelector('#decodedOutput');
   decodedOutput.textContent = `Decimal Value: ${decimalValue}`;
+
+  var binaryOutput = document.querySelector('#binaryOutput');
+  binaryOutput.textContent = `Binary Input: ${binaryString}`;
 }
