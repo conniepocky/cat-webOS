@@ -1,4 +1,9 @@
 body {
+    max-width: 100%;
+    margin: 0; 
+    box-sizing: border-box; 
+    overflow-x: hidden;
+
     background-image: url(./assets/background.jpg);
     background-size: cover;
     height: 100vh;
@@ -9,8 +14,15 @@ body {
 .topbar {
     display: flex;
     justify-content: space-between;
+    gap: 32px;
     position: absolute; 
-    width: 100%; 
+
+    /* alignment */
+    top: 10px;  
+    left: 10px; 
+    right: 10px; 
+    box-sizing: border-box;
+
     /* From https://css.glass glass effect */
     background: rgba(255, 255, 255, 0.2);
     border-radius: 16px;
@@ -21,6 +33,11 @@ body {
 
     color: #fff; 
     padding: 5px;
+}
+
+.desktopApps {
+    padding-top: 64px; 
+    padding-left: 16px;
 }
 
 .closebutton {

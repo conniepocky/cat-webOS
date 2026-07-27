@@ -9,12 +9,37 @@ function updateTime() {
 
 setInterval(updateTime, 1000);
 
-// window logic 
+// window and app icon logic 
 
 var welcomeScreen = document.querySelector("#welcome");
 
 var welcomeScreenOpen = document.querySelector("#welcomeopen");
-var welcomeScreenClose = document.querySelector("#welcomeclose");   
+
+welcomeScreenOpen.addEventListener('click', () => openWindow(welcomeScreen))
+
+var selectedIcon = undefined
+
+function selectIcon(element) {
+  element.classList.add('selected')
+  selectedIcon = element
+}
+
+function deselectIcon(element) {
+  element.classList.remove('selected')
+  selectedIcon = undefined
+}
+
+function handleIconTap(element, window) {
+  console.log('tapped icon')
+  if (element.classList.contains('selected')) {
+    deselectIcon(element)
+    openWindow(window)
+  } else {
+    selectIcon(element)
+  }
+}
+
+var biggestIndex = 1;
 
 function closeWindow(element) {
     element.style.display = "none";
@@ -22,19 +47,48 @@ function closeWindow(element) {
 
 function openWindow(element) {
     element.style.display = "block";
+    biggestIndex++;  
+    element.style.zIndex = biggestIndex;
 }
 
-welcomeScreenClose.addEventListener("click", function() {
-  closeWindow(welcomeScreen);
-});
+function addWindowTapHandling(element) {
+  element.addEventListener('mousedown', () => handleWindowTap(element))
+}
 
-welcomeScreenOpen.addEventListener("click", function() {
-  openWindow(welcomeScreen);
-});
+function handleWindowTap(element) {
+  biggestIndex++ 
+  element.style.zIndex = biggestIndex
+  topBar.style.zIndex = biggestIndex + 1
+  deselectIcon(selectedIcon)
+}
+
+function makeClosable(elementName) {
+  var screen = document.querySelector('#' + elementName)
+  var closeButton = document.querySelector('#' + elementName + 'close')
+  closeButton.addEventListener('click', () => closeWindow(screen))
+}
+
+
+function initializeIcon(name) {
+  var icon = document.querySelector('#' + name + 'icon')
+  var screen = document.querySelector('#' + name)
+  icon.addEventListener('click', () => handleIconTap(icon, screen))
+}
+
+function initializeWindow(elementName) {
+  var screen = document.querySelector('#' + elementName)
+  addWindowTapHandling(screen)
+  makeClosable(elementName)
+  dragElement(screen)
+  if (elementName != 'welcome') {
+    initializeIcon(elementName)
+  }
+}
+
+initializeWindow('welcome')
+initializeWindow('notes')
 
 // drag logic
-
-dragElement(document.getElementById("welcome"));
 
 function dragElement(elmnt) {
   var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
