@@ -29,7 +29,71 @@
             </div>
 
             <h1>Notepad</h1>
+
+            <div id="notesContent" style="overflow-y: scroll"></div>
         
+        </div>
+
+        <div id="photo" class="window" style="display: none;">
+            <div class="windowheader" id="photoheader">
+                <div class="closebutton" id="photoclose"></div>
+            </div>
+
+            <h1>Cat Photo :p</h1>
+            <p>Click on the photo to see a new one!</p>
+
+            <div id="photoContent"></div>
+        
+        </div>
+
+
+        <div id="binary" class="window" style="display: none;">
+            <div class="windowheader" id="binaryheader">
+                <div class="closebutton" id="binaryclose"></div>
+            </div>
+
+            <h1>Binary Decoder</h1>
+
+            <div id="binaryContent">
+                <p>Enter a binary number below to decode it into denary (standard numbers)!</p>
+
+                <div class="binaryGrid">
+                    <div class="bitGroup">
+                        <div>128</div>
+                        <input type="checkbox" id="bit128">
+                    </div>
+                    <div class="bitGroup">
+                        <div>64</div>
+                        <input type="checkbox" id="bit64">
+                    </div>
+                    <div class="bitGroup">
+                        <div>32</div>
+                        <input type="checkbox" id="bit32">
+                    </div>
+                    <div class="bitGroup">
+                        <div>16</div>
+                        <input type="checkbox" id="bit16">
+                    </div>
+                    <div class="bitGroup">
+                        <div>8</div>
+                        <input type="checkbox" id="bit8">
+                    </div>
+                    <div class="bitGroup">
+                        <div>4</div>
+                        <input type="checkbox" id="bit4">
+                    </div>
+                    <div class="bitGroup">
+                        <div>2</div>
+                        <input type="checkbox" id="bit2">
+                    </div>
+                    <div class="bitGroup">
+                        <div>1</div>
+                        <input type="checkbox" id="bit1">
+                    </div>
+                </div>
+                <button id="decodeButton" onclick="decodeBinary()">Decode</button>
+                <p id="decodedOutput"></p>
+            </div>
         </div>
 
         <div class="desktopApps">
@@ -37,7 +101,21 @@
                     <img src="assets/reading.png" style="width: 64px; height: 64px; border-radius: 16px;">
                     <p style="margin: 0px; color: #fff; ">Notes</p>
                 </div>
-         </div>
+        </div>
+         
+        <div class="desktopApps">
+                <div class="selected" id="photoicon" style="text-align: center; padding: 16px; filter: drop-shadow(0 0 8px black); width: fit-content">
+                    <img src="assets/love.png" style="width: 64px; height: 64px; border-radius: 16px;">
+                    <p style="margin: 0px; color: #fff; ">Cat Photos</p>
+                </div>
+        </div>
+
+        <div class="desktopApps">
+            <div class="selected" id="binaryicon" style="text-align: center; padding: 16px; filter: drop-shadow(0 0 8px black); width: fit-content">
+                <img src="assets/binary-code.png" style="width: 64px; height: 64px; border-radius: 16px;">
+                <p style="margin: 0px; color: #fff; ">Binary Decoder</p>
+            </div>
+        </div>
 
         <script src="script.js"></script>
 

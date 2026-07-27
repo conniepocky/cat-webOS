@@ -87,6 +87,8 @@ function initializeWindow(elementName) {
 
 initializeWindow('welcome')
 initializeWindow('notes')
+initializeWindow('binary')
+initializeWindow('photo')
 
 // drag logic
 
@@ -129,4 +131,85 @@ function dragElement(elmnt) {
     document.onmouseup = null;
     document.onmousemove = null;
   }
+}
+
+// notes app content
+
+var content = [
+  {
+    title: 'Notes App',
+    content: `
+          <p contenteditable="True">
+            <span contenteditable="true">
+              Welcome to <strong>notepad!</strong>
+              </br>
+              This is a place where you can store any thoughts or notes you may have. You can even edit the text in this note!
+            </span>
+        </p>
+      `
+  }
+]
+
+function setNotesContent(index) {
+  var notesContent = document.querySelector('#notesContent')
+
+  notesContent.innerHTML = content[index].content
+}
+
+setNotesContent(0)
+
+// photos
+
+const headers = new Headers({
+  "Content-Type": "application/json",
+  "x-api-key": "live_BZOhBxF0VXtHFCOtRJbo5fE3FzKJh9YdEDPkwKeasNxSIOBJ2oCfmZDaX4qBQXT5"
+});
+
+var requestOptions = {
+  method: 'GET',
+  headers: headers,
+  redirect: 'follow'
+};
+
+function setPhotoContent(photoUrl) {
+  var photoContent = document.querySelector('#photoContent')
+  photoContent.innerHTML = `<img src="${photoUrl}" alt="Random Cat" style="max-width: 50%; max-height: 50%;">`
+}
+
+function loadRandomCatPhoto() {
+  fetch("https://api.thecatapi.com/v1/images/search?size=med&mime_types=jpg&format=json&has_breeds=true&order=RANDOM&page=0&limit=1", requestOptions)
+    .then(response => response.json())
+    .then(data => {
+      if (data.length > 0) {
+        const photoUrl = data[0].url;
+        setPhotoContent(photoUrl);
+      }
+    })
+    .catch(error => console.log('error', error));
+}
+
+loadRandomCatPhoto()
+
+// when image pressed get new photo
+
+var photoContent = document.querySelector('#photoContent')
+photoContent.addEventListener('click', () => { loadRandomCatPhoto() })
+
+// binary app content
+
+function decodeBinary() {
+  var bit128 = document.querySelector('#bit128').checked ? 1 : 0;
+  var bit64 = document.querySelector('#bit64').checked ? 1 : 0;
+  var bit32 = document.querySelector('#bit32').checked ? 1 : 0;
+  var bit16 = document.querySelector('#bit16').checked ? 1 : 0;
+  var bit8 = document.querySelector('#bit8').checked ? 1 : 0;
+  var bit4 = document.querySelector('#bit4').checked ? 1 : 0;
+  var bit2 = document.querySelector('#bit2').checked ? 1 : 0;
+  var bit1 = document.querySelector('#bit1').checked ? 1 : 0;
+  
+  var binaryString = `${bit128}${bit64}${bit32}${bit16}${bit8}${bit4}${bit2}${bit1}`;
+  var decimalValue = parseInt(binaryString, 2);
+  
+  var decodedOutput = document.querySelector('#decodedOutput');
+  decodedOutput.textContent = `Decimal Value: ${decimalValue}`;
 }
